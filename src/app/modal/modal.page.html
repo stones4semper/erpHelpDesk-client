@@ -1,0 +1,19 @@
+<ion-content>
+	<!-- <h1>Modal</h1> -->
+	<ion-spinner class="center" *ngIf="loaderAMm" color="primary" name="lines"></ion-spinner>
+	<div *ngIf="!loaderAMm">
+		<ion-list>
+			<ion-item *ngFor="let gotData of gotDatas">
+				<ion-label (click)="setAm(gotData)" >{{gotData.name}}</ion-label>
+			</ion-item>
+		</ion-list>
+		<ion-infinite-scroll *ngIf="morePage" (ionInfinite)="loadMore($event)" loadingSpinner="bubbles" loadingText="Loading Users...">
+			<ion-infinite-scroll-content></ion-infinite-scroll-content>
+		</ion-infinite-scroll>
+	</div>
+	<!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+		<ion-fab-button (click)="dismiss()" color="danger">
+			<ion-icon name="close"></ion-icon>
+		</ion-fab-button>
+	</ion-fab> -->
+</ion-content>

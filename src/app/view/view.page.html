@@ -1,0 +1,252 @@
+<!-- <ion-header>
+	<ion-toolbar color="primary">
+		<ion-buttons slot="start">
+			<ion-back-button (click)="goHome()"></ion-back-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header> -->
+<ion-spinner class="center" *ngIf="loaderAMm" color="primary" name="lines"></ion-spinner>
+<ion-content *ngIf="!loaderAMm" fullscreen class="ion-padding">
+	<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+		<ion-refresher-content
+			pullingIcon="arrow-dropdown"
+			pullingText="Pull to refresh"
+			refreshingSpinner="circles"
+			refreshingText="Refreshing...">
+		</ion-refresher-content>
+	</ion-refresher>
+	<div class="form-style-10" *ngIf="!loaderAMm">
+		<h1>{{viewData.name}}</h1>
+		<ion-list>		
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Subject</ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>{{viewData.name}}</ion-card-content>
+			</ion-card>		
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Priority</ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>{{viewData.priority}}</ion-card-content>
+			</ion-card>		
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Category</ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>{{viewData.category_id.name}}</ion-card-content>
+			</ion-card>		
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Assigned User Group</ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>{{viewData.user_ticket_group_id.name}}</ion-card-content>
+			</ion-card>		
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Assigned Date </ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>{{viewData.assigned_date}}</ion-card-content>
+			</ion-card>		
+			<!-- <ion-card>
+				<ion-card-header>
+					<ion-card-title>QA User Group </ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>NOC</ion-card-content>
+			</ion-card>		
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Integration User Group </ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>BACKEND</ion-card-content>
+			</ion-card>		 -->
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Expected Finished Date </ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>{{viewData.expected_finish_date}}</ion-card-content>
+			</ion-card>		
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Customer</ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>{{viewData.partner_id.name}}</ion-card-content>
+			</ion-card>		
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Package</ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>{{viewData.services.name}}</ion-card-content>
+			</ion-card>		
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Location</ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>{{viewData.region_id.name}}</ion-card-content>
+			</ion-card>		
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Base Station</ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>{{viewData.base_station_maint_id.name}}</ion-card-content>
+			</ion-card>		
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Contact Person </ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>{{viewData.partner_name}}</ion-card-content>
+			</ion-card>		
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Bandwidth</ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>{{viewData.bandwidth_test}}</ion-card-content>
+			</ion-card>		
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Vlan</ion-card-title>
+				</ion-card-header>			
+				<ion-card-content> </ion-card-content>
+			</ion-card>		
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Customer IP Address </ion-card-title>
+				</ion-card-header>			
+				<ion-card-content></ion-card-content>
+			</ion-card>		
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Base Station IP Address</ion-card-title>
+				</ion-card-header>			
+				<ion-card-content></ion-card-content>
+			</ion-card>		
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Subnet</ion-card-title>
+				</ion-card-header>			
+				<ion-card-content></ion-card-content>
+			</ion-card>		
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Gateway</ion-card-title>
+				</ion-card-header>			
+				<ion-card-content></ion-card-content>
+			</ion-card>		
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Radio IP Address</ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>{{viewData.radio_ip_addr}}</ion-card-content>
+			</ion-card>		
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Indoor WAN IP Address</ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>{{viewData.indoor_ip_address}}</ion-card-content>
+			</ion-card>		
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Installation Date</ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>{{viewData.installation_date}}</ion-card-content>
+			</ion-card>		
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Comment</ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>{{viewData.comment_survey}}</ion-card-content>
+			</ion-card>		
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Configuration Status</ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>{{viewData.config_status}}</ion-card-content>
+			</ion-card>		
+			<!-- <ion-card>
+				<ion-card-header>
+					<ion-card-title>Quality Assurance Form </ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>
+					<img [src]="viewData.name" alt="">
+				</ion-card-content>
+			</ion-card>		 -->
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Confirmed RSSI </ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>{{viewData.confirmed_rssi_id.name}}</ion-card-content>
+			</ion-card>	
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Confirmed Power Level</ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>{{viewData.confirmed_power_level_id.name}}</ion-card-content>
+			</ion-card>	
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Bandwidth Test (Pass or Failed)</ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>{{viewData.bandwidth_test}}</ion-card-content>
+			</ion-card>	
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Earthen</ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>{{viewData.earthen}}</ion-card-content>
+			</ion-card>	
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Surge Protector</ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>{{viewData.surge_protector}}</ion-card-content>
+			</ion-card>	
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Indoor Picture </ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>{{viewData.indoor_picture}}</ion-card-content>
+			</ion-card>	
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Outdoor Picture </ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>{{viewData.outdoor_picture}}</ion-card-content>
+			</ion-card>	
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Cable Part Picture </ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>{{viewData.cable_part_picture}}</ion-card-content>
+			</ion-card>	
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>Incident details</ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>{{viewData.description}}</ion-card-content>
+			</ion-card>	
+			<!-- <ion-card>
+				<ion-card-header>
+					<ion-card-title>Subject</ion-card-title>
+				</ion-card-header>			
+				<ion-card-content>{{viewData.name}}</ion-card-content>
+			</ion-card> -->
+		</ion-list> 
+	</div>
+</ion-content>
+<div *ngIf="!loaderAMm">
+	<ion-fab horizontal="end" vertical="bottom" slot="fixed" >
+		<ion-fab-button color="danger" (click)="logoutUser()">
+			<ion-icon name="log-out"></ion-icon>
+		</ion-fab-button>
+	</ion-fab>
+	<ion-fab vertical="bottom" horizontal="start" slot="fixed">
+		<ion-fab-button color="primary" (click)="goAdd()">
+			<ion-icon name="add"></ion-icon>
+		</ion-fab-button>
+	</ion-fab>
+	<ion-fab vertical="top" color="light" (click)="goEditPage()"  horizontal="end" slot="fixed">
+		<ion-fab-button>
+			<ion-icon name="create"></ion-icon>
+		</ion-fab-button>
+	</ion-fab>
+</div>

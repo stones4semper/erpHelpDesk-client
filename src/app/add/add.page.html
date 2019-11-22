@@ -1,0 +1,191 @@
+<!-- <ion-header>
+	<ion-toolbar color="primary">
+		<ion-buttons slot="start">
+			<ion-back-button (click)="goHome()"></ion-back-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header> -->
+<ion-content fullscreen class="ion-padding">
+	<ion-spinner class="center" *ngIf="loaderAMm" color="primary" name="lines"></ion-spinner>
+	<div class="form-style-10" *ngIf="!loaderAMm">
+		<h1>Open New Ticket</h1>
+		<form #form="ngForm" (ngSubmit)="CreateTicket(form)">
+ 
+			<div class="section">
+				<span>1</span>
+				Ticket Details 
+			</div>
+			<div class="inner-wrap">				
+				<label>Subject <input type="text" name="subject" ngModel/></label>
+				<label>
+					<div class="rate">Priority 
+						<input type="radio" id="star5" name="priority" ngModel value="5" />
+						<label for="star5" title="text">5 stars</label>
+						<input type="radio" id="star4" name="priority"  ngModel value="4" />
+						<label for="star4" title="text">4 stars</label>
+						<input type="radio" id="star3" name="priority"  ngModel value="3" />
+						<label for="star3" title="text">3 stars</label>
+					</div>
+				</label>		
+				<br>
+				<br>
+				<input type="hidden" name="user_id" [value]="user_id" ngModel>
+				<p><label> Category 
+					<input type="text" (click)="OpenModal('kin_ticket_category')" [value]="category_id.name"/>
+					<input type="hidden" name="category_id" [value]="category_id.id" [(ngModel)]="category_id.id">
+				</label></p>	
+				<hr>		
+				<label> Assigned User Group						
+					<input type="text" (click)="OpenModal('user_ticket_group')" [value]="user_ticket_group_id.name"/>
+					<input type="hidden" name="user_ticket_group_id" [value]="user_ticket_group_id.id" [(ngModel)]="user_ticket_group_id.id">
+				</label>	
+				<label>Assigned Date 
+					<ion-datetime displayFormat="DD/MM/YYYY" placeholder="Select Date" name="assigned_date" ngModel></ion-datetime>
+				</label>
+				<label>Expected Finished Date 
+					<ion-datetime displayFormat="DD/MM/YYYY" placeholder="Select Date" name="expected_finish_date" ngModel></ion-datetime>
+				</label>
+				<label> Customer 						
+					<input type="text" (click)="OpenModal('res_partner')" [value]="partner_id.name"/>
+					<input type="hidden" name="partner_id" [value]="partner_id.id"  [(ngModel)]="partner_id.id">
+				</label>
+			</div>
+			
+			<div class="section">
+				<span>2</span>
+				Customers Details
+			</div>
+			<div class="inner-wrap">
+				<label>Package 						
+					<input type="text" (click)="OpenModal('product_template')" [value]="services.name"/>
+					<input type="hidden" name="services" [value]="services.id" [(ngModel)]="services.id">
+				</label>
+				<label>Location 
+					<input type="text" (click)="OpenModal('kkon_region')" [value]="region_id.name" />
+					<input type="hidden" name="region_id" [value]="region_id.id"  [(ngModel)]="region_id.id">
+				</label>
+				<label>Base Station 
+					<input type="text" (click)="OpenModal('base_station')" [value]="base_station_maint_id.name"/>
+					<input type="hidden" name="base_station_maint_id" [value]="base_station_maint_id.id"  [(ngModel)]="base_station_maint_id.id">
+				</label>
+				<label>Contact Person 
+					<input type="text" name="partner_name" ngModel/>
+				</label>
+				<label>Bandwidth  
+					<input type="text" name="bandwidth_test" ngModel/>
+				</label>
+				<!-- start here -->
+				<label>Vlan 
+					<input type="text" name="Vlan" ngModel/>
+				</label>
+				<label>Customer IP Address 
+					<input type="text" name="Customer_IP_Address" ngModel/>
+				</label>
+				<label>Base Station IP Address 
+					<input type="text" name="Base_station_IP_address" ngModel/>
+				</label>
+				<label>Subnet 
+					<input type="text" name="Subnet" ngModel/>
+				</label>
+				<label>Gateway 
+					<input type="text" name="Gateway" ngModel/>
+				</label>				
+				<!-- End here -->
+				<label>Radio IP Address 
+					<input type="text" name="radio_ip_addr" ngModel/>
+				</label>
+				<label>Indoor WAN IP Address 
+					<input type="text" name="indoor_ip_address" ngModel/>
+				</label>
+				<label>Installation Date 
+					<ion-datetime displayFormat="DD/MM/YYYY" placeholder="Select Date" name="installation_date" ngModel></ion-datetime>
+
+				</label>
+				<label>Comment 
+					<textarea name="comment_survey" ngModel></textarea>
+				</label>
+				<label>Configuration Status 
+					<input type="text" name="config_status" ngModel/>
+				</label>
+			</div>
+			
+			<div class="section">
+				<span>3</span>
+				Quality Assurance Form
+			</div> 
+			<div class="inner-wrap">
+				<label>Quality Assurance Form  
+					<ion-button color="medium" size="large" (click)="selectImage()">
+						<ion-icon slot="icon-only" name="camera"></ion-icon>
+					</ion-button>
+					<img [src]="picture" *ngIf="picture"/>
+					<input type="hidden" name="file" ngModel [value]="base64Image">
+				</label>
+				<label>Confirmed RSSI  
+					<input type="text" name="confirmed_rssi_id" ngModel/>
+				</label>
+				<label>Confirmed Power Level  
+					<input type="text" name="confirmed_power_level_id" ngModel/>
+				</label>
+				<label>Bandwidth Test (Pass or Failed) 
+					<ion-select name="bandwidth_test" ngModel>
+						<ion-select-option value="Yes">Yes</ion-select-option>
+						<ion-select-option value="No">No</ion-select-option>
+					</ion-select>					
+				</label>
+				<label>Earthen 
+					<ion-select name="earthen" ngModel>
+						<ion-select-option value="Yes">Yes</ion-select-option>
+						<ion-select-option value="No">No</ion-select-option>
+					</ion-select>					
+				</label>
+				<label>Surge Protector 
+					<ion-select name="surge_protector" ngModel>
+						<ion-select-option value="Yes">Yes</ion-select-option>
+						<ion-select-option value="No">No</ion-select-option>
+					</ion-select>					
+				</label>
+				<label>Indoor Picture 
+					<ion-select name="indoor_picture" ngModel>
+						<ion-select-option value="Yes">Yes</ion-select-option>
+						<ion-select-option value="No">No</ion-select-option>
+					</ion-select>					
+				</label>
+				<label>Outdoor Picture 
+					<ion-select name="outdoor_picture" ngModel>
+						<ion-select-option value="Yes">Yes</ion-select-option>
+						<ion-select-option value="No">No</ion-select-option>
+					</ion-select>					
+				</label>
+				<label>Cable Part Picture 
+					<ion-select name="cable_part_picture" ngModel>
+						<ion-select-option value="Yes">Yes</ion-select-option>
+						<ion-select-option value="No">No</ion-select-option>
+					</ion-select>					
+				</label>
+			</div>
+			
+			<div class="section">
+				<span>4</span>
+				Incident details
+			</div>
+			<div class="inner-wrap">
+				<label>Details 
+					<textarea name="description" ngModel></textarea>
+				</label>
+			</div>
+	
+			<div class="button-section">
+				<ion-spinner  color="primary" name="lines" *ngIf="authService.islog"></ion-spinner>
+				<button class="button button-full blue" *ngIf="!authService.islog"  type="submit" [disabled]="form.invalid">Create Ticket</button>
+			</div>
+		</form>
+	</div>
+</ion-content>
+<div *ngIf="!loaderAMm">
+	<ion-fab horizontal="end" vertical="bottom" slot="fixed" >
+		<ion-fab-button color="danger" (click)="logoutUser()">
+			<ion-icon name="log-out"></ion-icon>
+		</ion-fab-button>
+	</ion-fab>
+</div>
